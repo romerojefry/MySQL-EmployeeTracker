@@ -1,6 +1,5 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-const { start } = require("repl");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -27,16 +26,25 @@ function starter (){
         name: "options",
         chocies: [
             "Add Employee",
-            "Add Manger",
+            "Add Department",
             "Add Roles"
          ]
 
         }
     ])
     .then(function(res){
-        switch(res.start){
+        switch(res.options){
             case "Add Employee":
-            addEmployee
+            addEmployee();
+            break;
+
+            case "add Department":
+            addManger();
+            break;
+
+            case "Add Roles":
+            addRole();
+
         }
     })
 }

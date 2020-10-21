@@ -11,5 +11,11 @@ CREATE TABLE employees (
     manager_id INTEGER(10) NULL,
     PRIMARY KEY (id)
 );
+CREATE TABLE Department (
+    id INT AUTO_INCREMENT NOT NULL,
+    title VARCHAR(30),
+    Pay DECIMAL (30),
+
+)
 
 SELECT * FROM employees; 
