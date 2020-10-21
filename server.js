@@ -1,6 +1,8 @@
+// my dependices 
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
+// connecting my SQL workbench 
 var connection = mysql.createConnection({
     host: "localhost",
 
@@ -15,7 +17,7 @@ var connection = mysql.createConnection({
 connection.connect(function (err){
     if (err) throw err;
     console.log("connected as id" + connection.threadId + "\n");
-    starter ()
+    starter () // this will connect to node server.js and direct it to prompt
 });
 function starter (){
     inquirer
@@ -48,3 +50,39 @@ function starter (){
         }
     })
 }
+function addEmployee() {
+    console.log("adding new employee.\n");
+    inquirer 
+      .prompt ([ 
+        {
+          type: "input", 
+          message: "What is your Name?",
+          name: "name",
+        },
+        {
+          type: "list",
+          message: "What is the role?",
+          name: "title_id", 
+          choices: [1,2,3]
+        },
+      ])
+      .then (function(res){
+        const query = connection.query(
+          "INSERT INTO employees SET ?", 
+         res,
+          function(err, res) {
+            if (err) throw err;
+            console.log( "added\n");
+    
+            starter (); 
+          }
+        );    
+      }).then (function(res){
+        connection.query('UPDATE employees SET title_id = ${res.role} WHERE id = ${res.name}',
+        function (err, res){
+          console.log(res);
+          starter()
+        }
+        );
+      })
+    }
