@@ -6,3 +6,7 @@ VALUES ("Cook",400, 3); ("Cashier", 450, 2);
 
 INSERT INTO Department (name, department_id)
 VALUES ("Cheif",3); ("Account", 2); ("Owner", 1);
+
+--!updating from server.js// 
+UPDATE employee SET role_id = 4 where id = 4;
+UPDATE employee SET ? Wher ?;
